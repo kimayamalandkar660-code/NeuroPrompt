@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroPrompt - Code Analyzer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<main class="dashboard-main">
+
+    <header class="dashboard-topbar">
+        <div>
+            <h1>Code Debugger Assistant</h1>
+            <p>Analyze your code and identify possible errors.</p>
+        </div>
+        <a href="library.html">Prompt Library</a>
+    </header>
+
+    <section class="analyzer-section">
+
+        <h2>Code Analysis</h2>
+
+        <form id="analyzerForm">
+
+            <label for="language">Select Programming Language</label>
+            <select id="language" required>
+                <option value="">Select Language</option>
+                <option value="python">Python</option>
+                <option value="c">C</option>
+                <option value="cpp">C++</option>
+                <option value="java">Java</option>
+            </select>
+
+            <label for="codeInput">Enter Your Code</label>
+            <textarea
+                id="codeInput"
+                rows="12"
+                placeholder="Paste your code here..."
+                required
+            ></textarea>
+
+            <button type="submit" class="btn">
+                Analyze Code
+            </button>
+
+        </form>
+
+        <div id="analysisResult" aria-live="polite">
+            <h2>Analysis Result</h2>
+            <p>Your analysis will appear here.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const form = document.getElementById("analyzerForm");
+    const codeInput = document.getElementById("codeInput");
+    const language = document.getElementById("language");
+    const result = document.getElementById("analysisResult");
+
+    // Load code sent from the Prompt Library
+    const savedCode = sessionStorage.getItem("neuroPromptToLoad");
+    const savedLanguage = sessionStorage.getItem("neuroPromptLanguage");
+
+    if (savedCode) {
+        codeInput.value = savedCode;
+        sessionStorage.removeItem("neuroPromptToLoad");
+    }
+
+    if (savedLanguage) {
+        language.value = savedLanguage.toLowerCase();
+        sessionStorage.removeItem("neuroPromptLanguage");
+    }
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const code = codeInput.value.trim();
+        const selectedLanguage = language.value;
+
+        if (!code || !selectedLanguage) {
+            result.textContent = "Please enter code and select a language.";
+            return;
+        }
+
+        result.textContent = "Analyzing code...";
+
+        try {
+            const response = await fetch("/api/analyze", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    code: code,
+                    language: selectedLanguage
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Analysis failed.");
+            }
+
+            result.replaceChildren();
+
+            const heading = document.createElement("h2");
+            heading.textContent = "Analysis Result";
+
+            const output = document.createElement("pre");
+            output.textContent = data.result || data.analysis ||
+                JSON.stringify(data, null, 2);
+
+            result.append(heading, output);
+
+        } catch (error) {
+            result.textContent =
+                "Unable to analyze code: " + error.message;
+        }
+    });
+</script>
+
+</body>
+</html>
