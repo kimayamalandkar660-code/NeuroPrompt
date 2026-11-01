@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroPrompt - Prompt Library</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <main class="dashboard-main">
+        <header class="dashboard-topbar">
+            <div>
+                <h1>Prompt Library</h1>
+                <p>Save and manage your reusable coding prompts.</p>
+            </div>
+            <a href="analyzer.html">Open Analyzer</a>
+        </header>
+
+        <section class="library-section">
+            <h2>Create a Prompt</h2>
+
+            <form id="promptForm">
+                <label for="promptTitle">Prompt Title</label>
+                <input
+                    type="text"
+                    id="promptTitle"
+                    placeholder="Example: Python Error Checker"
+                    required
+                >
+
+                <label for="promptLanguage">Programming Language</label>
+                <select id="promptLanguage" required>
+                    <option value="">Select language</option>
+                    <option value="Python">Python</option>
+                    <option value="C">C</option>
+                    <option value="C++">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="General">General</option>
+                </select>
+
+                <label for="promptContent">Prompt Content</label>
+                <textarea
+                    id="promptContent"
+                    rows="6"
+                    placeholder="Enter your reusable prompt here..."
+                    required
+                ></textarea>
+
+                <button type="submit" class="btn">
+                    Save Prompt
+                </button>
+            </form>
+
+            <p id="promptMessage" role="status"></p>
+        </section>
+
+        <section class="library-section">
+            <h2>Saved Prompts</h2>
+            <div id="promptList">
+                <p>Your saved prompts will appear here.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const promptForm = document.getElementById("promptForm");
+        const promptList = document.getElementById("promptList");
+        const promptMessage = document.getElementById("promptMessage");
+
+        let prompts = [];
+
+        try {
+            prompts = JSON.parse(
+                localStorage.getItem("neuroPromptLibrary") || "[]"
+            );
+            if (!Array.isArray(prompts)) prompts = [];
+        } catch {
+            prompts = [];
+        }
+
+        function displayPrompts() {
+            promptList.replaceChildren();
+
+            if (prompts.length === 0) {
+                const empty = document.createElement("p");
+                empty.textContent = "No prompts saved yet.";
+                promptList.appendChild(empty);
+                return;
+            }
+
+            prompts.forEach((prompt, index) => {
+                const card = document.createElement("article");
+                const title = document.createElement("h3");
+                const language = document.createElement("p");
+                const content = document.createElement("pre");
+                const loadButton = document.createElement("button");
+                const deleteButton = document.createElement("button");
+
+                title.textContent = prompt.title;
+                language.textContent = "Language: " + prompt.language;
+                content.textContent = prompt.content;
+
+                loadButton.textContent = "Load into Analyzer";
+                loadButton.type = "button";
+                loadButton.addEventListener("click", () => {
+                    sessionStorage.setItem(
+                        "neuroPromptToLoad",
+                        prompt.content
+                    );
+                    sessionStorage.setItem(
+                        "neuroPromptLanguage",
+                        prompt.language
+                    );
+                    window.location.href = "analyzer.html";
+                });
+
+                deleteButton.textContent = "Delete";
+                deleteButton.type = "button";
+                deleteButton.addEventListener("click", () => {
+                    prompts.splice(index, 1);
+                    savePrompts();
+                    displayPrompts();
+                });
+
+                card.append(title, language, content, loadButton, deleteButton);
+                promptList.appendChild(card);
+            });
+        }
+
+        function savePrompts() {
+            try {
+                localStorage.setItem(
+                    "neuroPromptLibrary",
+                    JSON.stringify(prompts)
+                );
+                promptMessage.textContent = "Prompts saved successfully.";
+            } catch {
+                promptMessage.textContent =
+                    "Unable to save prompts in this browser.";
+            }
+        }
+
+        promptForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById("promptTitle").value.trim();
+            const language = document.getElementById("promptLanguage").value;
+            const content = document.getElementById("promptContent").value.trim();
+
+            if (!title || !language || !content) {
+                promptMessage.textContent = "Please complete all fields.";
+                return;
+            }
+
+            prompts.push({ title, language, content });
+            savePrompts();
+            promptForm.reset();
+            displayPrompts();
+        });
+
+        displayPrompts();
+    </script>
+
+</body>
+</html>
