@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroPrompt - Analysis History</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<main class="dashboard-main">
+
+    <header class="dashboard-topbar">
+        <div>
+            <h1>Analysis History</h1>
+            <p>View your previously analyzed code.</p>
+        </div>
+
+        <a href="analyzer.html">Open Analyzer</a>
+    </header>
+
+    <section class="history-section">
+
+        <h2>Previous Analyses</h2>
+
+        <button type="button" class="btn" id="refreshHistory">
+            Refresh History
+        </button>
+
+        <p id="historyMessage" aria-live="polite">
+            Loading history...
+        </p>
+
+        <div id="historyList"></div>
+
+    </section>
+
+</main>
+
+<script>
+    const historyList = document.getElementById("historyList");
+    const historyMessage = document.getElementById("historyMessage");
+
+    async function loadHistory() {
+        historyList.replaceChildren();
+        historyMessage.textContent = "Loading history...";
+
+        try {
+            const response = await fetch("/api/history");
+
+            if (!response.ok) {
+                throw new Error("Could not load history.");
+            }
+
+            const data = await response.json();
+
+            const records = Array.isArray(data)
+                ? data
+                : (data.history || data.records || []);
+
+            if (records.length === 0) {
+                historyMessage.textContent = "No analysis history found.";
+                return;
+            }
+
+            historyMessage.textContent = "";
+
+            records.forEach((record) => {
+                const card = document.createElement("article");
+                const heading = document.createElement("h3");
+                const language = document.createElement("p");
+                const code = document.createElement("pre");
+                const result = document.createElement("pre");
+
+                heading.textContent =
+                    record.title || "Code Analysis";
+
+                language.textContent =
+                    "Language: " + (record.language || "Not available");
+
+                code.textContent =
+                    record.code || record.source_code || "";
+
+                result.textContent =
+                    record.result || record.analysis || "";
+
+                card.append(heading, language);
+
+                if (code.textContent) {
+                    const codeHeading = document.createElement("h4");
+                    codeHeading.textContent = "Submitted Code";
+                    card.append(codeHeading, code);
+                }
+
+                if (result.textContent) {
+                    const resultHeading = document.createElement("h4");
+                    resultHeading.textContent = "Analysis Result";
+                    card.append(resultHeading, result);
+                }
+
+                historyList.appendChild(card);
+            });
+
+        } catch (error) {
+            historyMessage.textContent =
+                "Unable to load history. Please check the server connection.";
+        }
+    }
+
+    document.getElementById("refreshHistory")
+        .addEventListener("click", loadHistory);
+
+    loadHistory();
+</script>
+
+</body>
+</html>
