@@ -110,6 +110,37 @@
             <a href="/register">Register</a>
         </div>
     </div>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
+    const username = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert("Login successful!");
+            window.location.href = "/application.html";
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        alert("Unable to connect to the server.");
+    }
+});
+</script>
 </body>
 </html>
