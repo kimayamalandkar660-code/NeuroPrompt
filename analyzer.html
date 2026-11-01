@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NeuroPrompt - Code Analyzer</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<aside id="navbar"></aside>
+
+
+<main class="dashboard-main">
+
+
+    <header class="dashboard-topbar">
+
+
+        <div>
+
+            <h1>
+                Code Analyzer
+            </h1>
+
+            <p>
+                Enter your code and run a NeuroPrompt
+                diagnostic check.
+            </p>
+
+        </div>
+
+
+        <div class="top-session">
+
+            <div class="top-user-icon">
+                U
+            </div>
+
+            <div class="top-user-details">
+
+                <strong id="topUsername">
+                    User
+                </strong>
+
+                <span>
+                    Logged In
+                </span>
+
+            </div>
+
+
+            <button
+                id="topLogout"
+                class="logout-button">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </header>
+
+
+    <section class="analyzer-container">
+
+
+        <div class="card">
+
+
+            <h2>
+                Prompt & Code Diagnostic Tools
+            </h2>
+
+
+            <p class="page-desc">
+                Select a programming language and
+                enter your code below.
+            </p>
+
+
+            <label for="lang-select">
+                Target Language
+            </label>
+
+
+            <select id="lang-select">
+
+                <option value="Python">
+                    Python
+                </option>
+
+                <option value="C++">
+                    C++
+                </option>
+
+                <option value="C">
+                    C
+                </option>
+
+                <option value="Java">
+                    Java
+                </option>
+
+            </select>
+
+
+            <label for="code-entry">
+                Code / Prompt Input
+            </label>
+
+
+            <textarea
+                id="code-entry"
+                placeholder="Paste your code here..."
+            ></textarea>
+
+
+            <button
+                class="btn analyzer-button"
+                onclick="runAnalysis()">
+
+                ⚡ Run Diagnostic Check
+
+            </button>
+
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div
+            id="diagnostic-results"
+            class="results-card">
+
+
+            <div class="result-section">
+
+
+                <div class="result-title error-title">
+
+                    Detected Issue
+
+                </div>
+
+
+                <div
+                    id="err-text"
+                    class="result-text">
+
+                    Run the diagnostic check
+                    to see the detected issue.
+
+                </div>
+
+
+            </div>
+
+
+            <div class="result-section">
+
+
+                <div class="result-title solution-title">
+
+                    Recommended Solution
+
+                </div>
+
+
+                <div
+                    id="sol-text"
+                    class="result-text">
+
+                    Your recommended solution
+                    will appear here.
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+
+</html>

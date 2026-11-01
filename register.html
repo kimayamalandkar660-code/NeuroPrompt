@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NeuroPrompt - Create Account</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body class="login-page">
+
+
+<header class="public-header">
+
+    <div class="public-brand">
+
+        <div class="brand-badge">
+            N
+        </div>
+
+        <span>
+            NeuroPrompt
+        </span>
+
+    </div>
+
+
+    <div class="public-header-right">
+
+        AI-Powered Code Diagnostic Studio
+
+    </div>
+
+</header>
+
+
+<main class="register-wrapper">
+
+
+    <div class="register-card">
+
+
+        <div class="login-card-header">
+
+            <div class="login-lock">
+                👤
+            </div>
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Create your NeuroPrompt Studio account.
+            </p>
+
+        </div>
+
+
+        <form id="registerForm"
+              onsubmit="registerUser(event)">
+
+
+            <label for="registerUsername">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="registerUsername"
+                placeholder="Enter username"
+                required
+            >
+
+
+            <label for="registerPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create password"
+                required
+            >
+
+
+            <label for="registerConfirmPassword">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="registerConfirmPassword"
+                placeholder="Confirm password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="btn login-button">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <p id="registerMessage"
+           class="message">
+        </p>
+
+
+        <p class="register-back">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</main>
+
+
+<footer class="public-footer">
+
+    NeuroPrompt © 2026
+
+</footer>
+
+
+<script src="js/auth.js"></script>
+
+</body>
+
+</html>

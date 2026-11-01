@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NeuroPrompt - History</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<aside id="navbar"></aside>
+
+
+<main class="dashboard-main">
+
+
+    <header class="dashboard-topbar">
+
+
+        <div>
+
+            <h1>
+                Diagnostic history
+            </h1>
+
+            <p>
+                Previous code Analysis Results
+            </p>
+
+        </div>
+
+
+        <div class="top-session">
+
+            <div class="top-user-icon">
+                U
+            </div>
+
+            <div class="top-user-details">
+
+                <strong id="topUsername">
+                    User
+                </strong>
+
+                <span>
+                    Logged In
+                </span>
+
+            </div>
+
+
+            <button
+                id="topLogout"
+                class="logout-button">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </header>
+
+
+    <section class="history-container">
+
+
+        <div class="card history-card">
+
+
+            <h2>
+                Execution Audit Logs
+            </h2>
+
+
+            <p class="page-desc">
+                Overview of code submissions
+                recorded for your account.
+            </p>
+
+
+            <div class="table-wrapper">
+
+
+                <table>
+
+            <thead>
+                   <tr>
+        <th>Date & Time</th>
+        <th>Language</th>
+        <th>Uploaded Code</th>
+        <th>Detected Issue</th>
+        <th>Recommended Solution</th>
+    </tr>
+</thead>
+
+<tbody id="historyBody">
+</tbody>
+                    
+                            
+                            
+            
+
+
+                           
+
+                            
+                                
+                            
+
+                        
+
+                    
+
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+
+
+<script>
+
+loadHistory();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NeuroPrompt - Languages</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<!-- SIDEBAR -->
+
+<aside id="navbar"></aside>
+
+
+<!-- MAIN -->
+
+<main class="dashboard-main">
+
+
+    <header class="dashboard-topbar">
+
+
+        <div>
+
+            <h1>
+                Supported Programming Languages
+            </h1>
+
+            <p>
+                Select a language card to load a preset
+                prompt into the analyzer.
+            </p>
+
+        </div>
+
+
+        <div class="top-session">
+
+            <div class="top-user-icon">
+                U
+            </div>
+
+            <div class="top-user-details">
+
+                <strong id="topUsername">
+                    User
+                </strong>
+
+                <span>
+                    Logged In
+                </span>
+
+            </div>
+
+
+            <button
+                id="topLogout"
+                class="logout-button">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </header>
+
+
+    <section class="language-grid">
+
+
+        <!-- PYTHON -->
+
+        <div class="language-card">
+
+
+            <div>
+
+                <div class="language-header">
+
+                    <h2>
+                        Python
+                    </h2>
+
+                    <span class="language-badge badge-python">
+                        Scripting
+                    </span>
+
+                </div>
+
+
+                <p>
+                    Checks indentation, missing colon
+                    syntax, brackets and common
+                    Python errors.
+                </p>
+
+
+                <pre><code>def parse_prompt(data):
+    if not data
+        return None
+    return data.strip()</code></pre>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="loadLanguage(
+                    'Python',
+                    `def parse_prompt(data):
+    if not data
+        return None
+    return data.strip()`
+                )">
+
+                Load Python Prompt
+
+            </button>
+
+
+        </div>
+
+
+        <!-- C++ -->
+
+        <div class="language-card">
+
+
+            <div>
+
+                <div class="language-header">
+
+                    <h2>
+                        C++
+                    </h2>
+
+                    <span class="language-badge badge-cpp">
+                        Systems
+                    </span>
+
+                </div>
+
+
+                <p>
+                    Checks semicolons, braces,
+                    pointers and common C++
+                    syntax issues.
+                </p>
+
+
+                <pre><code>#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; "Neuro"
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="loadLanguage(
+                    'C++',
+                    `#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; &quot;Neuro&quot;
+    return 0;
+}`
+                )">
+
+                Load C++ Prompt
+
+            </button>
+
+
+        </div>
+
+
+        <!-- C -->
+
+        <div class="language-card">
+
+
+            <div>
+
+                <div class="language-header">
+
+                    <h2>
+                        C
+                    </h2>
+
+                    <span class="language-badge badge-c">
+                        Procedural
+                    </span>
+
+                </div>
+
+
+                <p>
+                    Checks pointers, memory use,
+                    braces and common C errors.
+                </p>
+
+
+                <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    printf("Neuro")
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="loadLanguage(
+                    'C',
+                    `#include &lt;stdio.h&gt;
+int main() {
+    printf(&quot;Neuro&quot;)
+    return 0;
+}`
+                )">
+
+                Load C Prompt
+
+            </button>
+
+
+        </div>
+
+
+        <!-- JAVA -->
+
+        <div class="language-card">
+
+
+            <div>
+
+                <div class="language-header">
+
+                    <h2>
+                        Java
+                    </h2>
+
+                    <span class="language-badge badge-java">
+                        Enterprise
+                    </span>
+
+                </div>
+
+
+                <p>
+                    Checks semicolons, braces and
+                    common Java syntax errors.
+                </p>
+
+
+                <pre><code>public class PromptApp {
+    public static void main(String[] args) {
+        System.out.println("Neuro")
+    }
+}</code></pre>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="loadLanguage(
+                    'Java',
+                    `public class PromptApp {
+    public static void main(String[] args) {
+        System.out.println(&quot;Neuro&quot;)
+    }
+}`
+                )">
+
+                Load Java Prompt
+
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+
+</html>

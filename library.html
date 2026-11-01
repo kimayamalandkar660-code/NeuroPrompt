@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NeuroPrompt - Prompt Library</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<aside id="navbar"></aside>
+
+
+<main class="dashboard-main">
+
+
+    <header class="dashboard-topbar">
+
+
+        <div>
+
+            <h1>
+                Prompt Library & Templates
+            </h1>
+
+            <p>
+                Save frequently used code snippets
+                and prompts.
+            </p>
+
+        </div>
+
+
+        <div class="top-session">
+
+            <div class="top-user-icon">
+                U
+            </div>
+
+            <div class="top-user-details">
+
+                <strong id="topUsername">
+                    User
+                </strong>
+
+                <span>
+                    Logged In
+                </span>
+
+            </div>
+
+
+            <button
+                id="topLogout"
+                class="logout-button">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </header>
+
+
+    <section class="library-container">
+
+
+        <div class="card">
+
+
+            <h2>
+                Add New Template
+            </h2>
+
+
+            <form id="templateForm">
+
+
+                <label for="templateTitle">
+                    Template Title
+                </label>
+
+
+                <input
+                    type="text"
+                    id="templateTitle"
+                    placeholder="e.g. Python API Boilerplate"
+                    required
+                >
+
+
+                <label for="templateLang">
+                    Associated Language
+                </label>
+
+
+                <select id="templateLang">
+
+                    <option value="Python">
+                        Python
+                    </option>
+
+                    <option value="C++">
+                        C++
+                    </option>
+
+                    <option value="C">
+                        C
+                    </option>
+
+                    <option value="Java">
+                        Java
+                    </option>
+
+                </select>
+
+
+                <label for="templateBody">
+                    Prompt / Code Snippet
+                </label>
+
+
+                <textarea
+                    id="templateBody"
+                    placeholder="Paste code or prompt here..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="btn">
+
+                    Save to Library
+
+                </button>
+
+
+            </form>
+
+
+            <p
+                id="templateMessage"
+                class="message">
+            </p>
+
+
+        </div>
+
+
+        <h2 class="section-title">
+            Saved Library Items
+        </h2>
+
+
+        <div
+            id="templates"
+            class="template-grid">
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("templateForm");
+
+    if (form) {
+        form.addEventListener("submit", addTemplate);
+    }
+
+    loadTemplates();
+
+});
+
+</script>
+
+
+</body>
+
+</html>
